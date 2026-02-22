@@ -18,6 +18,7 @@ func (et *eventTarget) AddEventListener(eventType string, listener EventHandlerF
 		go listener(wrapEvent(args[0]))
 		return js.Undefined()
 	})
+	// TODO: listenerImpl.Release() when no longer needed
 
 	et.Call("addEventListener", eventType, listenerImpl)
 }

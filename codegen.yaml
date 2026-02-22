@@ -15,6 +15,7 @@ types:
   - {name: text,              parent: characterData}
   - {name: tokenList}
   - {name: uiEvent,           parent: event}
+  - {name: window}
 
 properties:
   canvasRenderingContext2D:

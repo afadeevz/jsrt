@@ -637,3 +637,23 @@ func wrapUIEvent(value js.Value) UIEvent {
 		return newUIEvent(value)
 	}
 }
+
+///// Window /////
+
+type window struct {
+	*wrapper
+}
+
+func newWindow(value js.Value) *window {
+	if value.IsNull() {
+		return nil
+	}
+	return &window{newWrapper(value)}
+}
+
+func wrapWindow(value js.Value) Window {
+	switch {
+	default:
+		return newWindow(value)
+	}
+}

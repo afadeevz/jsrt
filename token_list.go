@@ -1,0 +1,73 @@
+//go:build js && wasm
+
+package jsrt
+
+import "syscall/js"
+
+// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
+type TokenList interface {
+	Wrapper
+
+	GetLength() uint
+	GetValue() string
+	Add(tokens ...string)
+	Contains(token string) bool
+	// Entries()
+	// ForEach()
+	Item(index uint) *string
+	// Keys()
+	Remove(tokens ...string)
+	Replace(oldToken string, newToken string) bool
+	Supports(token string) bool
+	// Toggle()
+	// Values()
+}
+
+type tokenList struct {
+	*wrapper
+}
+
+func newTokenList(value js.Value) *tokenList {
+	if value.IsNull() {
+		return nil
+	}
+	return &tokenList{newWrapper(value)}
+}
+
+func (tl *tokenList) GetLength() uint {
+	return uint(tl.Get("length").Float())
+}
+
+func (tl *tokenList) GetValue() string {
+	return tl.Get("values").String()
+}
+
+func (tl *tokenList) Add(tokens ...string) {
+	tl.Call("add", toSliceOfAny(tokens)...)
+}
+
+func (tl *tokenList) Contains(token string) bool {
+	return tl.Call("contains", token).Bool()
+}
+
+func (tl *tokenList) Item(index uint) *string {
+	res := tl.Call("item, index")
+	if res.IsNull() {
+		return nil
+	}
+
+	str := res.String()
+	return &str
+}
+
+func (tl *tokenList) Remove(tokens ...string) {
+	tl.Call("remove", toSliceOfAny(tokens)...)
+}
+
+func (tl *tokenList) Replace(oldToken string, newToken string) bool {
+	return tl.Call("replace", oldToken, newToken).Bool()
+}
+
+func (tl *tokenList) Supports(token string) bool {
+	return tl.Call("supports", token).Bool()
+}

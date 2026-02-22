@@ -2,8 +2,6 @@
 
 package jsrt
 
-import "syscall/js"
-
 // https://developer.mozilla.org/en-US/docs/Web/API/Node
 type Node interface {
 	EventTarget
@@ -12,26 +10,6 @@ type Node interface {
 
 	GetParentElement() Element
 	FirstChild() Node
-}
-
-type node struct {
-	*eventTarget
-}
-
-func newNode(value js.Value) *node {
-	if value.IsNull() {
-		return nil
-	}
-	return &node{newEventTarget(value)}
-}
-
-func wrapNode(value js.Value) Node {
-	switch {
-	case instanceOf(value, "Element"):
-		return wrapElement(value)
-	default:
-		return newNode(value)
-	}
 }
 
 func (n *node) AppendChild(child Node) Node {

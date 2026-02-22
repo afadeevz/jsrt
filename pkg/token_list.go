@@ -2,8 +2,6 @@
 
 package jsrt
 
-import "syscall/js"
-
 // https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 type TokenList interface {
 	Wrapper
@@ -21,17 +19,6 @@ type TokenList interface {
 	Supports(token string) bool
 	// Toggle()
 	// Values()
-}
-
-type tokenList struct {
-	*wrapper
-}
-
-func newTokenList(value js.Value) *tokenList {
-	if value.IsNull() {
-		return nil
-	}
-	return &tokenList{newWrapper(value)}
 }
 
 func (tl *tokenList) GetLength() uint {

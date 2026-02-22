@@ -18,17 +18,6 @@ func GetDocument() Document {
 	return newDocument(js.Global().Get("document"))
 }
 
-type document struct {
-	*node
-}
-
-func newDocument(value js.Value) *document {
-	if value.IsNull() {
-		return nil
-	}
-	return &document{newNode(value)}
-}
-
 func (d *document) CreateElement(tagName string) Element {
 	return wrapElement(d.Call("createElement", tagName))
 }

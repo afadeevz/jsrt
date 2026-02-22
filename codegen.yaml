@@ -1,0 +1,15 @@
+types:
+  - {name: document,          parent: node}
+  - {name: element,           parent: node}
+  - {name: htmlElement,       parent: element}
+  - {name: htmlInputElement,  parent: htmlElement}
+  - {name: node,              parent: eventTarget}
+  - {name: uiEvent,           parent: event}
+  - {name: text,              parent: characterData}
+  - {name: characterData,     parent: node}
+
+  - {name: console}
+  - {name: event}
+  - {name: htmlCollection}
+  - {name: tokenList}
+  - {name: eventTarget}

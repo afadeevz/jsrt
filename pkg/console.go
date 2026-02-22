@@ -19,17 +19,6 @@ func GetConsole() Console {
 	return newConsole(js.Global().Get("console"))
 }
 
-type console struct {
-	*wrapper
-}
-
-func newConsole(value js.Value) Console {
-	if value.IsNull() {
-		return nil
-	}
-	return &console{newWrapper(value)}
-}
-
 func (c *console) Clear() {
 	c.Call("clear")
 }

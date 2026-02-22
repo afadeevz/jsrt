@@ -2,21 +2,11 @@
 
 package jsrt
 
-import "syscall/js"
-
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 type HTMLCollection interface {
 	Length() uint
 	Item(index uint) Element
 	NamedItem(key string) Element
-}
-
-type htmlCollection struct {
-	*wrapper
-}
-
-func newHTMLCollection(value js.Value) *htmlCollection {
-	return &htmlCollection{newWrapper(value)}
 }
 
 func (hc *htmlCollection) Length() uint {

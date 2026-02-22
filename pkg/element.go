@@ -2,8 +2,6 @@
 
 package jsrt
 
-import "syscall/js"
-
 // https://developer.mozilla.org/en-US/docs/Web/API/Element
 type Element interface {
 	Node
@@ -14,26 +12,6 @@ type Element interface {
 	GetID() string
 	SetInnerHTML(string)
 	QuerySelector(string) Element
-}
-
-type element struct {
-	*node
-}
-
-func newElement(value js.Value) *element {
-	if value.IsNull() {
-		return nil
-	}
-	return &element{newNode(value)}
-}
-
-func wrapElement(value js.Value) Element {
-	switch {
-	case instanceOf(value, "HTMLElement"):
-		return wrapHTMLElement(value)
-	default:
-		return newElement(value)
-	}
 }
 
 func (e *element) Remove() {

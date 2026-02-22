@@ -1,15 +1,16 @@
 types:
+  - {name: characterData,     parent: node}
   - {name: document,          parent: node}
   - {name: element,           parent: node}
   - {name: htmlElement,       parent: element}
   - {name: htmlInputElement,  parent: htmlElement}
+  - {name: keyboardEvent,     parent: uiEvent}
   - {name: node,              parent: eventTarget}
-  - {name: uiEvent,           parent: event}
   - {name: text,              parent: characterData}
-  - {name: characterData,     parent: node}
+  - {name: uiEvent,           parent: event}
 
   - {name: console}
   - {name: event}
+  - {name: eventTarget}
   - {name: htmlCollection}
   - {name: tokenList}
-  - {name: eventTarget}

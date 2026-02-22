@@ -5,6 +5,28 @@ package jsrt
 
 import "syscall/js"
 
+///// CharacterData /////
+
+type characterData struct {
+	*node
+}
+
+func newCharacterData(value js.Value) *characterData {
+	if value.IsNull() {
+		return nil
+	}
+	return &characterData{newNode(value)}
+}
+
+func wrapCharacterData(value js.Value) CharacterData {
+	switch {
+	case instanceOf(value, "Text"):
+		return wrapText(value)
+	default:
+		return newCharacterData(value)
+	}
+}
+
 ///// Document /////
 
 type document struct {
@@ -89,6 +111,26 @@ func wrapHTMLInputElement(value js.Value) HTMLInputElement {
 	}
 }
 
+///// KeyboardEvent /////
+
+type keyboardEvent struct {
+	*uiEvent
+}
+
+func newKeyboardEvent(value js.Value) *keyboardEvent {
+	if value.IsNull() {
+		return nil
+	}
+	return &keyboardEvent{newUIEvent(value)}
+}
+
+func wrapKeyboardEvent(value js.Value) KeyboardEvent {
+	switch {
+	default:
+		return newKeyboardEvent(value)
+	}
+}
+
 ///// Node /////
 
 type node struct {
@@ -104,34 +146,14 @@ func newNode(value js.Value) *node {
 
 func wrapNode(value js.Value) Node {
 	switch {
+	case instanceOf(value, "CharacterData"):
+		return wrapCharacterData(value)
 	case instanceOf(value, "Document"):
 		return wrapDocument(value)
 	case instanceOf(value, "Element"):
 		return wrapElement(value)
-	case instanceOf(value, "CharacterData"):
-		return wrapCharacterData(value)
 	default:
 		return newNode(value)
-	}
-}
-
-///// UIEvent /////
-
-type uiEvent struct {
-	*event
-}
-
-func newUIEvent(value js.Value) *uiEvent {
-	if value.IsNull() {
-		return nil
-	}
-	return &uiEvent{newEvent(value)}
-}
-
-func wrapUIEvent(value js.Value) UIEvent {
-	switch {
-	default:
-		return newUIEvent(value)
 	}
 }
 
@@ -155,25 +177,25 @@ func wrapText(value js.Value) Text {
 	}
 }
 
-///// CharacterData /////
+///// UIEvent /////
 
-type characterData struct {
-	*node
+type uiEvent struct {
+	*event
 }
 
-func newCharacterData(value js.Value) *characterData {
+func newUIEvent(value js.Value) *uiEvent {
 	if value.IsNull() {
 		return nil
 	}
-	return &characterData{newNode(value)}
+	return &uiEvent{newEvent(value)}
 }
 
-func wrapCharacterData(value js.Value) CharacterData {
+func wrapUIEvent(value js.Value) UIEvent {
 	switch {
-	case instanceOf(value, "Text"):
-		return wrapText(value)
+	case instanceOf(value, "KeyboardEvent"):
+		return wrapKeyboardEvent(value)
 	default:
-		return newCharacterData(value)
+		return newUIEvent(value)
 	}
 }
 
@@ -219,6 +241,28 @@ func wrapEvent(value js.Value) Event {
 	}
 }
 
+///// EventTarget /////
+
+type eventTarget struct {
+	*wrapper
+}
+
+func newEventTarget(value js.Value) *eventTarget {
+	if value.IsNull() {
+		return nil
+	}
+	return &eventTarget{newWrapper(value)}
+}
+
+func wrapEventTarget(value js.Value) EventTarget {
+	switch {
+	case instanceOf(value, "Node"):
+		return wrapNode(value)
+	default:
+		return newEventTarget(value)
+	}
+}
+
 ///// HTMLCollection /////
 
 type htmlCollection struct {
@@ -256,27 +300,5 @@ func wrapTokenList(value js.Value) TokenList {
 	switch {
 	default:
 		return newTokenList(value)
-	}
-}
-
-///// EventTarget /////
-
-type eventTarget struct {
-	*wrapper
-}
-
-func newEventTarget(value js.Value) *eventTarget {
-	if value.IsNull() {
-		return nil
-	}
-	return &eventTarget{newWrapper(value)}
-}
-
-func wrapEventTarget(value js.Value) EventTarget {
-	switch {
-	case instanceOf(value, "Node"):
-		return wrapNode(value)
-	default:
-		return newEventTarget(value)
 	}
 }

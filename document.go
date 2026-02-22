@@ -6,7 +6,7 @@ import "syscall/js"
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Document
 type Document interface {
-	Wrapper
+	Node
 
 	CreateElement(tagName string) Element // TODO: options param
 	CreateTextNode(text string) Text
@@ -19,14 +19,14 @@ func GetDocument() Document {
 }
 
 type document struct {
-	*wrapper
+	*node
 }
 
 func newDocument(value js.Value) *document {
 	if value.IsNull() {
 		return nil
 	}
-	return &document{newWrapper(value)}
+	return &document{newNode(value)}
 }
 
 func (d *document) CreateElement(tagName string) Element {

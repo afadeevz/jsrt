@@ -1,16 +1,58 @@
 types:
+  - {name: canvasRenderingContext2D}
   - {name: characterData,     parent: node}
+  - {name: console}
   - {name: document,          parent: node}
   - {name: element,           parent: node}
+  - {name: event}
+  - {name: eventTarget}
+  - {name: htmlCanvasElement, parent: htmlElement}
+  - {name: htmlCollection}
   - {name: htmlElement,       parent: element}
   - {name: htmlInputElement,  parent: htmlElement}
   - {name: keyboardEvent,     parent: uiEvent}
   - {name: node,              parent: eventTarget}
   - {name: text,              parent: characterData}
+  - {name: tokenList}
   - {name: uiEvent,           parent: event}
 
-  - {name: console}
-  - {name: event}
-  - {name: eventTarget}
-  - {name: htmlCollection}
-  - {name: tokenList}
+properties:
+  canvasRenderingContext2D:
+    direction: string
+    fillStyle: string
+    filter: string
+    font: string
+    fontKerning: string
+    fontStretch: string
+    fontVariantCaps: string
+    globalAlpha: float64
+    globalCompositeOperation: string
+    imageSmoothingEnabled: bool
+    imageSmoothingQuality: string
+    lang: string
+    letterSpacing: string
+    lineCap: string
+    lineDashOffset: float64
+    lineJoin: string
+    lineWidth: float64
+    miterLimit: float64
+    shadowBlur: float64
+    shadowColor: string
+    shadowOffsetX: float64
+    shadowOffsetY: float64
+    strokeStyle: string
+    textAlign: string
+    textBaseline: string
+    textRendering: string
+    wordSpacing: string
+
+  htmlCanvasElement:
+    width: int
+    height: int
+
+  element:
+    id: string
+
+  htmlInputElement:
+    value: string
+

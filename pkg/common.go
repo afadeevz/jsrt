@@ -70,3 +70,11 @@ func instanceOf(value js.Value, className string) bool {
 	class := js.Global().Get(className)
 	return value.InstanceOf(class)
 }
+
+func fromOptionalString(value js.Value) *string {
+	if value.IsNull() || value.IsUndefined() {
+		return nil
+	}
+	str := value.String()
+	return &str
+}

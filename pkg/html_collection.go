@@ -4,12 +4,12 @@ package jsrt
 
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 type HTMLCollection interface {
-	Length() uint
+	GetLength() uint
 	Item(index uint) Element
 	NamedItem(key string) Element
 }
 
-func (hc *htmlCollection) Length() uint {
+func (hc *htmlCollection) GetLength() uint {
 	return uint(hc.Get("length").Int())
 }
 

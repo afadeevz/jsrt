@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -20,7 +19,7 @@ func main() {
 
 func loadConfig(path string) *Config {
 	// read configuration file
-	data, err := ioutil.ReadFile(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatalf("failed to read config %s: %v", path, err)
 	}
@@ -31,6 +30,7 @@ func loadConfig(path string) *Config {
 	}
 
 	cfg.CalculateChildren()
+	cfg.PopulateProperties()
 
 	return &cfg
 }
@@ -55,6 +55,7 @@ func generateCode(config *Config) error {
 
 var typeTemplate = template.Must(template.New("type").Funcs(template.FuncMap{
 	"capitalize": capitalize,
+	"getter":     getter,
 }).Parse(`
 ///// {{capitalize .Name}} /////
 
@@ -87,6 +88,17 @@ func wrap{{capitalize .Name}}(value js.Value) {{capitalize .Name}} {
 		return new{{capitalize .Name}}(value)
 	}
 }
+
+{{- if .Properties}}
+{{range $name,$typ := .Properties}}
+func (t *{{$.Name}}) Get{{capitalize $name}}() {{$typ}} {
+	return {{getter $typ $name}}
+}
+func (t *{{$.Name}}) Set{{capitalize $name}}(v {{$typ}}) {
+	t.Set("{{$name}}", v)
+}
+{{end}}
+{{- end}}
 `))
 
 func generateType(typeCfg TypeConfig) error {
@@ -94,13 +106,15 @@ func generateType(typeCfg TypeConfig) error {
 }
 
 type Config struct {
-	Types []TypeConfig
+	Types      []TypeConfig
+	Properties map[string]map[string]string
 }
 
 type TypeConfig struct {
-	Name     string
-	Parent   *string
-	Children []string // calculated programmatically
+	Name       string
+	Parent     *string
+	Children   []string          // calculated programmatically
+	Properties map[string]string // property name -> type (from config)
 }
 
 func (c *Config) CalculateChildren() {
@@ -124,18 +138,55 @@ func (c *Config) CalculateChildren() {
 	}
 }
 
+func (c *Config) PopulateProperties() {
+	indexByName := make(map[string]int)
+	for i := range c.Types {
+		indexByName[c.Types[i].Name] = i
+	}
+
+	for _type, props := range c.Properties {
+		index, ok := indexByName[_type]
+		if !ok {
+			log.Printf("warning: type %s not found for properties", _type)
+			continue
+		}
+		c.Types[index].Properties = props
+	}
+}
+
 func capitalize(s string) string {
 	if len(s) == 0 {
 		return s
 	}
 
-	if strings.HasPrefix(s, "html") {
-		return "HTML" + s[4:]
-	}
-
-	if strings.HasPrefix(s, "ui") {
-		return "UI" + s[2:]
+	for _, w := range []string{
+		"html",
+		"ui",
+		"id",
+	} {
+		if strings.HasPrefix(s, w) {
+			return strings.ToUpper(w) + s[len(w):]
+		}
 	}
 
 	return string(s[0]-32) + s[1:]
+}
+
+func getter(typ, name string) string {
+	val := fmt.Sprintf("t.Get(\"%s\")", name)
+
+	switch typ {
+	case "float64":
+		return val + ".Float()"
+	case "string":
+		return val + ".String()"
+	case "bool":
+		return val + ".Bool()"
+	case "int":
+		return val + ".Int()"
+	case "uint":
+		return "uint(" + val + ".Int())"
+	default:
+		panic(fmt.Sprintf("unsupported type for getter conversion: %s", typ))
+	}
 }

@@ -7,7 +7,7 @@ type TokenList interface {
 	Wrapper
 
 	GetLength() uint
-	GetValue() string
+	GetValues() string
 	Add(tokens ...string)
 	Contains(token string) bool
 	// Entries()
@@ -25,7 +25,7 @@ func (tl *tokenList) GetLength() uint {
 	return uint(tl.Get("length").Float())
 }
 
-func (tl *tokenList) GetValue() string {
+func (tl *tokenList) GetValues() string {
 	return tl.Get("values").String()
 }
 

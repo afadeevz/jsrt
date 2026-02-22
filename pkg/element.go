@@ -22,14 +22,6 @@ func (e *element) GetClassList() TokenList {
 	return newTokenList(e.Get("classList"))
 }
 
-func (e *element) SetID(id string) {
-	e.Set("id", id)
-}
-
-func (e *element) GetID() string {
-	return e.Get("id").String()
-}
-
 func (e *element) SetInnerHTML(innerHTML string) {
 	e.Set("innerHTML", innerHTML)
 }

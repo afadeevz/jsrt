@@ -5,6 +5,216 @@ package jsrt
 
 import "syscall/js"
 
+///// CanvasRenderingContext2D /////
+
+type canvasRenderingContext2D struct {
+	*wrapper
+}
+
+func newCanvasRenderingContext2D(value js.Value) *canvasRenderingContext2D {
+	if value.IsNull() {
+		return nil
+	}
+	return &canvasRenderingContext2D{newWrapper(value)}
+}
+
+func wrapCanvasRenderingContext2D(value js.Value) CanvasRenderingContext2D {
+	switch {
+	default:
+		return newCanvasRenderingContext2D(value)
+	}
+}
+
+func (t *canvasRenderingContext2D) GetDirection() string {
+	return t.Get("direction").String()
+}
+func (t *canvasRenderingContext2D) SetDirection(v string) {
+	t.Set("direction", v)
+}
+
+func (t *canvasRenderingContext2D) GetFillStyle() string {
+	return t.Get("fillStyle").String()
+}
+func (t *canvasRenderingContext2D) SetFillStyle(v string) {
+	t.Set("fillStyle", v)
+}
+
+func (t *canvasRenderingContext2D) GetFilter() string {
+	return t.Get("filter").String()
+}
+func (t *canvasRenderingContext2D) SetFilter(v string) {
+	t.Set("filter", v)
+}
+
+func (t *canvasRenderingContext2D) GetFont() string {
+	return t.Get("font").String()
+}
+func (t *canvasRenderingContext2D) SetFont(v string) {
+	t.Set("font", v)
+}
+
+func (t *canvasRenderingContext2D) GetFontKerning() string {
+	return t.Get("fontKerning").String()
+}
+func (t *canvasRenderingContext2D) SetFontKerning(v string) {
+	t.Set("fontKerning", v)
+}
+
+func (t *canvasRenderingContext2D) GetFontStretch() string {
+	return t.Get("fontStretch").String()
+}
+func (t *canvasRenderingContext2D) SetFontStretch(v string) {
+	t.Set("fontStretch", v)
+}
+
+func (t *canvasRenderingContext2D) GetFontVariantCaps() string {
+	return t.Get("fontVariantCaps").String()
+}
+func (t *canvasRenderingContext2D) SetFontVariantCaps(v string) {
+	t.Set("fontVariantCaps", v)
+}
+
+func (t *canvasRenderingContext2D) GetGlobalAlpha() float64 {
+	return t.Get("globalAlpha").Float()
+}
+func (t *canvasRenderingContext2D) SetGlobalAlpha(v float64) {
+	t.Set("globalAlpha", v)
+}
+
+func (t *canvasRenderingContext2D) GetGlobalCompositeOperation() string {
+	return t.Get("globalCompositeOperation").String()
+}
+func (t *canvasRenderingContext2D) SetGlobalCompositeOperation(v string) {
+	t.Set("globalCompositeOperation", v)
+}
+
+func (t *canvasRenderingContext2D) GetImageSmoothingEnabled() bool {
+	return t.Get("imageSmoothingEnabled").Bool()
+}
+func (t *canvasRenderingContext2D) SetImageSmoothingEnabled(v bool) {
+	t.Set("imageSmoothingEnabled", v)
+}
+
+func (t *canvasRenderingContext2D) GetImageSmoothingQuality() string {
+	return t.Get("imageSmoothingQuality").String()
+}
+func (t *canvasRenderingContext2D) SetImageSmoothingQuality(v string) {
+	t.Set("imageSmoothingQuality", v)
+}
+
+func (t *canvasRenderingContext2D) GetLang() string {
+	return t.Get("lang").String()
+}
+func (t *canvasRenderingContext2D) SetLang(v string) {
+	t.Set("lang", v)
+}
+
+func (t *canvasRenderingContext2D) GetLetterSpacing() string {
+	return t.Get("letterSpacing").String()
+}
+func (t *canvasRenderingContext2D) SetLetterSpacing(v string) {
+	t.Set("letterSpacing", v)
+}
+
+func (t *canvasRenderingContext2D) GetLineCap() string {
+	return t.Get("lineCap").String()
+}
+func (t *canvasRenderingContext2D) SetLineCap(v string) {
+	t.Set("lineCap", v)
+}
+
+func (t *canvasRenderingContext2D) GetLineDashOffset() float64 {
+	return t.Get("lineDashOffset").Float()
+}
+func (t *canvasRenderingContext2D) SetLineDashOffset(v float64) {
+	t.Set("lineDashOffset", v)
+}
+
+func (t *canvasRenderingContext2D) GetLineJoin() string {
+	return t.Get("lineJoin").String()
+}
+func (t *canvasRenderingContext2D) SetLineJoin(v string) {
+	t.Set("lineJoin", v)
+}
+
+func (t *canvasRenderingContext2D) GetLineWidth() float64 {
+	return t.Get("lineWidth").Float()
+}
+func (t *canvasRenderingContext2D) SetLineWidth(v float64) {
+	t.Set("lineWidth", v)
+}
+
+func (t *canvasRenderingContext2D) GetMiterLimit() float64 {
+	return t.Get("miterLimit").Float()
+}
+func (t *canvasRenderingContext2D) SetMiterLimit(v float64) {
+	t.Set("miterLimit", v)
+}
+
+func (t *canvasRenderingContext2D) GetShadowBlur() float64 {
+	return t.Get("shadowBlur").Float()
+}
+func (t *canvasRenderingContext2D) SetShadowBlur(v float64) {
+	t.Set("shadowBlur", v)
+}
+
+func (t *canvasRenderingContext2D) GetShadowColor() string {
+	return t.Get("shadowColor").String()
+}
+func (t *canvasRenderingContext2D) SetShadowColor(v string) {
+	t.Set("shadowColor", v)
+}
+
+func (t *canvasRenderingContext2D) GetShadowOffsetX() float64 {
+	return t.Get("shadowOffsetX").Float()
+}
+func (t *canvasRenderingContext2D) SetShadowOffsetX(v float64) {
+	t.Set("shadowOffsetX", v)
+}
+
+func (t *canvasRenderingContext2D) GetShadowOffsetY() float64 {
+	return t.Get("shadowOffsetY").Float()
+}
+func (t *canvasRenderingContext2D) SetShadowOffsetY(v float64) {
+	t.Set("shadowOffsetY", v)
+}
+
+func (t *canvasRenderingContext2D) GetStrokeStyle() string {
+	return t.Get("strokeStyle").String()
+}
+func (t *canvasRenderingContext2D) SetStrokeStyle(v string) {
+	t.Set("strokeStyle", v)
+}
+
+func (t *canvasRenderingContext2D) GetTextAlign() string {
+	return t.Get("textAlign").String()
+}
+func (t *canvasRenderingContext2D) SetTextAlign(v string) {
+	t.Set("textAlign", v)
+}
+
+func (t *canvasRenderingContext2D) GetTextBaseline() string {
+	return t.Get("textBaseline").String()
+}
+func (t *canvasRenderingContext2D) SetTextBaseline(v string) {
+	t.Set("textBaseline", v)
+}
+
+func (t *canvasRenderingContext2D) GetTextRendering() string {
+	return t.Get("textRendering").String()
+}
+func (t *canvasRenderingContext2D) SetTextRendering(v string) {
+	t.Set("textRendering", v)
+}
+
+func (t *canvasRenderingContext2D) GetWordSpacing() string {
+	return t.Get("wordSpacing").String()
+}
+func (t *canvasRenderingContext2D) SetWordSpacing(v string) {
+	t.Set("wordSpacing", v)
+}
+
+
 ///// CharacterData /////
 
 type characterData struct {
@@ -24,6 +234,26 @@ func wrapCharacterData(value js.Value) CharacterData {
 		return wrapText(value)
 	default:
 		return newCharacterData(value)
+	}
+}
+
+///// Console /////
+
+type console struct {
+	*wrapper
+}
+
+func newConsole(value js.Value) *console {
+	if value.IsNull() {
+		return nil
+	}
+	return &console{newWrapper(value)}
+}
+
+func wrapConsole(value js.Value) Console {
+	switch {
+	default:
+		return newConsole(value)
 	}
 }
 
@@ -69,6 +299,113 @@ func wrapElement(value js.Value) Element {
 	}
 }
 
+func (t *element) GetID() string {
+	return t.Get("id").String()
+}
+func (t *element) SetID(v string) {
+	t.Set("id", v)
+}
+
+
+///// Event /////
+
+type event struct {
+	*wrapper
+}
+
+func newEvent(value js.Value) *event {
+	if value.IsNull() {
+		return nil
+	}
+	return &event{newWrapper(value)}
+}
+
+func wrapEvent(value js.Value) Event {
+	switch {
+	case instanceOf(value, "UIEvent"):
+		return wrapUIEvent(value)
+	default:
+		return newEvent(value)
+	}
+}
+
+///// EventTarget /////
+
+type eventTarget struct {
+	*wrapper
+}
+
+func newEventTarget(value js.Value) *eventTarget {
+	if value.IsNull() {
+		return nil
+	}
+	return &eventTarget{newWrapper(value)}
+}
+
+func wrapEventTarget(value js.Value) EventTarget {
+	switch {
+	case instanceOf(value, "Node"):
+		return wrapNode(value)
+	default:
+		return newEventTarget(value)
+	}
+}
+
+///// HTMLCanvasElement /////
+
+type htmlCanvasElement struct {
+	*htmlElement
+}
+
+func newHTMLCanvasElement(value js.Value) *htmlCanvasElement {
+	if value.IsNull() {
+		return nil
+	}
+	return &htmlCanvasElement{newHTMLElement(value)}
+}
+
+func wrapHTMLCanvasElement(value js.Value) HTMLCanvasElement {
+	switch {
+	default:
+		return newHTMLCanvasElement(value)
+	}
+}
+
+func (t *htmlCanvasElement) GetHeight() int {
+	return t.Get("height").Int()
+}
+func (t *htmlCanvasElement) SetHeight(v int) {
+	t.Set("height", v)
+}
+
+func (t *htmlCanvasElement) GetWidth() int {
+	return t.Get("width").Int()
+}
+func (t *htmlCanvasElement) SetWidth(v int) {
+	t.Set("width", v)
+}
+
+
+///// HTMLCollection /////
+
+type htmlCollection struct {
+	*wrapper
+}
+
+func newHTMLCollection(value js.Value) *htmlCollection {
+	if value.IsNull() {
+		return nil
+	}
+	return &htmlCollection{newWrapper(value)}
+}
+
+func wrapHTMLCollection(value js.Value) HTMLCollection {
+	switch {
+	default:
+		return newHTMLCollection(value)
+	}
+}
+
 ///// HTMLElement /////
 
 type htmlElement struct {
@@ -84,6 +421,8 @@ func newHTMLElement(value js.Value) *htmlElement {
 
 func wrapHTMLElement(value js.Value) HTMLElement {
 	switch {
+	case instanceOf(value, "HTMLCanvasElement"):
+		return wrapHTMLCanvasElement(value)
 	case instanceOf(value, "HTMLInputElement"):
 		return wrapHTMLInputElement(value)
 	default:
@@ -110,6 +449,14 @@ func wrapHTMLInputElement(value js.Value) HTMLInputElement {
 		return newHTMLInputElement(value)
 	}
 }
+
+func (t *htmlInputElement) GetValue() string {
+	return t.Get("value").String()
+}
+func (t *htmlInputElement) SetValue(v string) {
+	t.Set("value", v)
+}
+
 
 ///// KeyboardEvent /////
 
@@ -177,6 +524,26 @@ func wrapText(value js.Value) Text {
 	}
 }
 
+///// TokenList /////
+
+type tokenList struct {
+	*wrapper
+}
+
+func newTokenList(value js.Value) *tokenList {
+	if value.IsNull() {
+		return nil
+	}
+	return &tokenList{newWrapper(value)}
+}
+
+func wrapTokenList(value js.Value) TokenList {
+	switch {
+	default:
+		return newTokenList(value)
+	}
+}
+
 ///// UIEvent /////
 
 type uiEvent struct {
@@ -196,109 +563,5 @@ func wrapUIEvent(value js.Value) UIEvent {
 		return wrapKeyboardEvent(value)
 	default:
 		return newUIEvent(value)
-	}
-}
-
-///// Console /////
-
-type console struct {
-	*wrapper
-}
-
-func newConsole(value js.Value) *console {
-	if value.IsNull() {
-		return nil
-	}
-	return &console{newWrapper(value)}
-}
-
-func wrapConsole(value js.Value) Console {
-	switch {
-	default:
-		return newConsole(value)
-	}
-}
-
-///// Event /////
-
-type event struct {
-	*wrapper
-}
-
-func newEvent(value js.Value) *event {
-	if value.IsNull() {
-		return nil
-	}
-	return &event{newWrapper(value)}
-}
-
-func wrapEvent(value js.Value) Event {
-	switch {
-	case instanceOf(value, "UIEvent"):
-		return wrapUIEvent(value)
-	default:
-		return newEvent(value)
-	}
-}
-
-///// EventTarget /////
-
-type eventTarget struct {
-	*wrapper
-}
-
-func newEventTarget(value js.Value) *eventTarget {
-	if value.IsNull() {
-		return nil
-	}
-	return &eventTarget{newWrapper(value)}
-}
-
-func wrapEventTarget(value js.Value) EventTarget {
-	switch {
-	case instanceOf(value, "Node"):
-		return wrapNode(value)
-	default:
-		return newEventTarget(value)
-	}
-}
-
-///// HTMLCollection /////
-
-type htmlCollection struct {
-	*wrapper
-}
-
-func newHTMLCollection(value js.Value) *htmlCollection {
-	if value.IsNull() {
-		return nil
-	}
-	return &htmlCollection{newWrapper(value)}
-}
-
-func wrapHTMLCollection(value js.Value) HTMLCollection {
-	switch {
-	default:
-		return newHTMLCollection(value)
-	}
-}
-
-///// TokenList /////
-
-type tokenList struct {
-	*wrapper
-}
-
-func newTokenList(value js.Value) *tokenList {
-	if value.IsNull() {
-		return nil
-	}
-	return &tokenList{newWrapper(value)}
-}
-
-func wrapTokenList(value js.Value) TokenList {
-	switch {
-	default:
-		return newTokenList(value)
 	}
 }

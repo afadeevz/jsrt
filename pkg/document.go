@@ -23,7 +23,7 @@ func (d *document) CreateElement(tagName string) Element {
 }
 
 func (d *document) CreateTextNode(text string) Text {
-	return newText(d.Call("createTextNode", text))
+	return wrapText(d.Call("createTextNode", text))
 }
 
 func (d *document) GetElementByID(id string) Element {
@@ -31,5 +31,5 @@ func (d *document) GetElementByID(id string) Element {
 }
 
 func (d *document) GetElementsByClassName(names string) HTMLCollection {
-	return newHTMLCollection(d.Call("getElementsByClassName", names))
+	return wrapHTMLCollection(d.Call("getElementsByClassName", names))
 }

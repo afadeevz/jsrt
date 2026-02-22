@@ -21,14 +21,6 @@ type TokenList interface {
 	// Values()
 }
 
-func (tl *tokenList) GetLength() uint {
-	return uint(tl.Get("length").Float())
-}
-
-func (tl *tokenList) GetValues() string {
-	return tl.Get("values").String()
-}
-
 func (tl *tokenList) Add(tokens ...string) {
 	tl.Call("add", toSliceOfAny(tokens)...)
 }

@@ -329,6 +329,31 @@ func wrapEvent(value js.Value) Event {
 	}
 }
 
+func (t *event) GetBubbles() bool {
+	return t.Get("bubbles").Bool()
+}
+
+func (t *event) GetCancelable() bool {
+	return t.Get("cancelable").Bool()
+}
+
+func (t *event) GetComposed() bool {
+	return t.Get("composed").Bool()
+}
+
+func (t *event) GetDefaultPrevented() bool {
+	return t.Get("defaultPrevented").Bool()
+}
+
+func (t *event) GetIsTrusted() bool {
+	return t.Get("isTrusted").Bool()
+}
+
+func (t *event) GetType() string {
+	return t.Get("type").String()
+}
+
+
 ///// EventTarget /////
 
 type eventTarget struct {
@@ -406,6 +431,11 @@ func wrapHTMLCollection(value js.Value) HTMLCollection {
 	}
 }
 
+func (t *htmlCollection) GetLength() uint {
+	return uint(t.Get("length").Int())
+}
+
+
 ///// HTMLElement /////
 
 type htmlElement struct {
@@ -478,6 +508,39 @@ func wrapKeyboardEvent(value js.Value) KeyboardEvent {
 	}
 }
 
+func (t *keyboardEvent) GetAltKey() bool {
+	return t.Get("altKey").Bool()
+}
+
+func (t *keyboardEvent) GetCode() string {
+	return t.Get("code").String()
+}
+
+func (t *keyboardEvent) GetCtrlKey() bool {
+	return t.Get("ctrlKey").Bool()
+}
+
+func (t *keyboardEvent) GetIsComposing() bool {
+	return t.Get("isComposing").Bool()
+}
+
+func (t *keyboardEvent) GetKey() string {
+	return t.Get("key").String()
+}
+
+func (t *keyboardEvent) GetMetaKey() bool {
+	return t.Get("metaKey").Bool()
+}
+
+func (t *keyboardEvent) GetRepeat() bool {
+	return t.Get("repeat").Bool()
+}
+
+func (t *keyboardEvent) GetShiftKey() bool {
+	return t.Get("shiftKey").Bool()
+}
+
+
 ///// Node /////
 
 type node struct {
@@ -543,6 +606,15 @@ func wrapTokenList(value js.Value) TokenList {
 		return newTokenList(value)
 	}
 }
+
+func (t *tokenList) GetLength() uint {
+	return uint(t.Get("length").Int())
+}
+
+func (t *tokenList) GetValues() string {
+	return t.Get("values").String()
+}
+
 
 ///// UIEvent /////
 

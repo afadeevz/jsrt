@@ -31,6 +31,7 @@ func loadConfig(path string) *Config {
 
 	cfg.CalculateChildren()
 	cfg.PopulateProperties()
+	cfg.PopulateGetters()
 
 	return &cfg
 }
@@ -99,6 +100,14 @@ func (t *{{$.Name}}) Set{{capitalize $name}}(v {{$typ}}) {
 }
 {{end}}
 {{- end}}
+
+{{- if .Getters}}
+{{range $name,$typ := .Getters}}
+func (t *{{$.Name}}) Get{{capitalize $name}}() {{$typ}} {
+	return {{getter $typ $name}}
+}
+{{end}}
+{{- end}}
 `))
 
 func generateType(typeCfg TypeConfig) error {
@@ -108,13 +117,16 @@ func generateType(typeCfg TypeConfig) error {
 type Config struct {
 	Types      []TypeConfig
 	Properties map[string]map[string]string
+	Getters    map[string]map[string]string // getters-only
 }
 
 type TypeConfig struct {
-	Name       string
-	Parent     *string
-	Children   []string          // calculated programmatically
-	Properties map[string]string // property name -> type (from config)
+	Name   string
+	Parent *string
+
+	Children   []string
+	Properties map[string]string
+	Getters    map[string]string
 }
 
 func (c *Config) CalculateChildren() {
@@ -151,6 +163,22 @@ func (c *Config) PopulateProperties() {
 			continue
 		}
 		c.Types[index].Properties = props
+	}
+}
+
+func (c *Config) PopulateGetters() {
+	indexByName := make(map[string]int)
+	for i := range c.Types {
+		indexByName[c.Types[i].Name] = i
+	}
+
+	for _type, getters := range c.Getters {
+		index, ok := indexByName[_type]
+		if !ok {
+			log.Printf("warning: type %s not found for getters", _type)
+			continue
+		}
+		c.Types[index].Getters = getters
 	}
 }
 

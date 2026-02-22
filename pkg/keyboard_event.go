@@ -26,38 +26,6 @@ const (
 	KeyboardEventLocationNumpad   KeyboardEventLocation = 0x03
 )
 
-func (ke *keyboardEvent) GetAltKey() bool {
-	return ke.Get("altKey").Bool()
-}
-
-func (ke *keyboardEvent) GetCode() string {
-	return ke.Get("code").String()
-}
-
-func (ke *keyboardEvent) GetCtrlKey() bool {
-	return ke.Get("ctrlKey").Bool()
-}
-
-func (ke *keyboardEvent) GetIsComposing() bool {
-	return ke.Get("isComposing").Bool()
-}
-
-func (ke *keyboardEvent) GetKey() string {
-	return ke.Get("key").String()
-}
-
 func (ke *keyboardEvent) GetLocation() KeyboardEventLocation {
 	return KeyboardEventLocation(ke.Get("location").Int())
-}
-
-func (ke *keyboardEvent) GetMetaKey() bool {
-	return ke.Get("metaKey").Bool()
-}
-
-func (ke *keyboardEvent) GetRepeat() bool {
-	return ke.Get("repeat").Bool()
-}
-
-func (ke *keyboardEvent) GetShiftKey() bool {
-	return ke.Get("shiftKey").Bool()
 }

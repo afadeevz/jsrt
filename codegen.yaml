@@ -56,3 +56,29 @@ properties:
   htmlInputElement:
     value: string
 
+getters:
+  htmlCollection:
+    length: uint
+
+  tokenList:
+    length: uint
+    values: string
+
+  keyboardEvent:
+    altKey: bool
+    code: string
+    ctrlKey: bool
+    isComposing: bool
+    key: string
+    metaKey: bool
+    repeat: bool
+    shiftKey: bool
+
+  event:
+    bubbles: bool
+    cancelable: bool
+    composed: bool
+    defaultPrevented: bool
+    isTrusted: bool
+    type: string
+

@@ -16,34 +16,9 @@ type Event interface {
 	GetType() string
 }
 
-func (e *event) GetBubbles() bool {
-	return e.Get("bubbles").Bool()
-}
-
-func (e *event) GetCancelable() bool {
-	return e.Get("cancelable").Bool()
-}
-
-func (e *event) GetComposed() bool {
-	return e.Get("composed").Bool()
-}
-
 func (e *event) GetCurrentTarget() EventTarget {
 	return wrapEventTarget(e.Get("currentTarget"))
 }
-
-func (e *event) GetDefaultPrevented() bool {
-	return e.Get("defaultPrevented").Bool()
-}
-
-func (e *event) GetIsTrusted() bool {
-	return e.Get("isTrusted").Bool()
-}
-
 func (e *event) GetTarget() EventTarget {
 	return wrapEventTarget(e.Get("target"))
-}
-
-func (e *event) GetType() string {
-	return e.Get("type").String()
 }

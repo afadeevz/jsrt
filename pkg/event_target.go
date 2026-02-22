@@ -15,7 +15,7 @@ type EventTarget interface {
 
 func (et *eventTarget) AddEventListener(eventType string, listener EventHandlerFn) {
 	listenerImpl := js.FuncOf(func(_ js.Value, args []js.Value) any {
-		go listener(newEvent(args[0]))
+		go listener(wrapEvent(args[0]))
 		return js.Undefined()
 	})
 
